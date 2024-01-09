@@ -1,0 +1,28 @@
+datasource db{
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model users {
+  id         Int        @id @default(autoincrement())
+  name       String
+  mobile_number String?
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  otps        otp[]
+  profile_picture String?
+}
+
+model otp {
+  id         Int        @id @default(autoincrement())
+  user_id    Int
+  otp        Int
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  user       users  @relation(fields: [user_id], references: [id])
+}
+
