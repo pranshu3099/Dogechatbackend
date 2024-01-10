@@ -32,12 +32,11 @@ io.on("connection", (socket) => {
     console.log("User disconnected due to inactivity");
   }, 10 * 60 * 1000);
   socket.on("chat message", async (msg) => {
-    console.log(msg);
     clearTimeout(inactivityTimeout);
     io.emit("chat message", msg);
     let doge_message = await DogeResponse(msg);
     console.log(doge_message);
-    io.emit("chat message", doge_message);
+    io.emit("chat message", doge_message, "doge");
   });
 
   socket.on("disconnect", () => {
