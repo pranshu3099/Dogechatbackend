@@ -31,7 +31,6 @@ const DogeResponse = async (usermessage) => {
     console.log(err);
   }
 };
-// DogeResponse("hello how are you");
 module.exports = {
   DogeResponse,
 };
