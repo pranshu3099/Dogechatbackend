@@ -16,7 +16,7 @@ const {
   userLogin,
   isLoggedin,
 } = require("../controller/AuthController");
-const { sendOtp, verifyotp } = require("../services/otpservice");
+const { sendEmail, verifyotp } = require("../services/mailservice");
 const { uploadImage } = require("../controller/ImageController");
 router.use(Cookies.express([""]));
 router.use(
@@ -30,7 +30,7 @@ router.post(
   "/dogechat/register",
   validate({ body: registerSchema }),
   userRegister,
-  sendOtp
+  sendEmail
 );
 
 router.post(
