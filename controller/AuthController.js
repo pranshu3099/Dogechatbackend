@@ -6,15 +6,13 @@ const { findUser } = require("../utils/finduser");
 
 const userRegister = async (req, res, next) => {
   try {
-    const { name, mobile_number } = req?.body;
-
+    const { name, mobile_number, email } = req?.body;
     const user = await Prisma.users.findFirst({
       where: {
         mobile_number,
       },
     });
-
-    if (!user) {
+    if (user) {
       return res.status(409).json({
         error: "Conflict",
         message: "User with the provided mobile_number already exists.",
@@ -24,16 +22,19 @@ const userRegister = async (req, res, next) => {
         data: {
           name: name,
           mobile_number: mobile_number,
+          email: email,
         },
       });
       // sendOtp(mobile_number);
-      req.mobile_number = mobile_number;
-      next();
-      return res.status(201).json({
-        message: "user created sucessfully",
+      // req.user_mobile_number = mobile_number;
+      // req.user_email = email;
+      // req.user_name = name;
+      req.user_info = {
+        message: "user created successfully",
         success: true,
         otp_message: "OTP sent successfully",
-      });
+      };
+      next();
     }
   } catch (err) {
     console.log(err);
@@ -50,7 +51,6 @@ const userLogin = async (req, res, next) => {
     if (user) {
       req.session.user = user;
       req.session.userid = user?.mobile_number;
-      console.log(req.sessionID);
       return res
         .status(200)
         .json({ message: "successfully loggedin", success: true, user: user });
@@ -70,6 +70,7 @@ const userLogin = async (req, res, next) => {
 const isLoggedin = (req, res) => {
   try {
     const user = req.session.user;
+    console.log("Authcontroller", user);
     if (user) {
       return res.status(200).json({ success: true, user: user });
     } else {
