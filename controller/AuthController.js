@@ -25,10 +25,7 @@ const userRegister = async (req, res, next) => {
           email: email,
         },
       });
-      // sendOtp(mobile_number);
-      // req.user_mobile_number = mobile_number;
-      // req.user_email = email;
-      // req.user_name = name;
+
       req.user_info = {
         message: "user created successfully",
         success: true,
