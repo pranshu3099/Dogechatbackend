@@ -25,12 +25,11 @@ const userRegister = async (req, res, next) => {
           email: email,
         },
       });
-
       req.user_info = {
         message: "user created successfully",
         success: true,
-        otp_message: "OTP sent successfully",
       };
+      console.log(req.body);
       next();
     }
   } catch (err) {
