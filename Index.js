@@ -7,10 +7,11 @@ const port = 3000;
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
+const frontend_url = process.env.FRONTEND_URL;
 const io = socketIO(server, {
   path: "/socket.io",
   cors: {
-    origin: "http://localhost:5173",
+    origin: `${frontend_url}`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   },
