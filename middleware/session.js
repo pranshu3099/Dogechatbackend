@@ -11,5 +11,5 @@ module.exports = session({
     secure: false,
     maxAge: 864000000,
     httpOnly: true,
-  }, // httpOnly: true prevents client side js to tamper cookies
+  },
 });
