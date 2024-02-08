@@ -8,7 +8,8 @@ const generateotp = () => {
 };
 
 const sendEmail = async (req, res, next) => {
-  const { email, mobile_number, user_info, name } = req?.body;
+  const { email, mobile_number, name } = req?.body;
+  const user_info = req?.user_info;
   try {
     let otp = generateotp();
     const user = await findUser(mobile_number);
@@ -26,6 +27,8 @@ const sendEmail = async (req, res, next) => {
         pass: password,
       },
     });
+
+    console.log(user_info);
 
     const mailOptions = {
       from: "srivastavapranshu2@gmail.com",
