@@ -66,7 +66,6 @@ const userLogin = async (req, res, next) => {
 const isLoggedin = (req, res) => {
   try {
     const user = req.session.user;
-    console.log("Authcontroller", user);
     if (user) {
       return res.status(200).json({ success: true, user: user });
     } else {
