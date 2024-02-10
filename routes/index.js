@@ -5,7 +5,10 @@ const Cookies = require("cookies");
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-const frontend_url = process.env.FRONTEND_URL;
+function get_frontend_url() {
+  const frontend_url = process.env.FRONTEND_URL;
+  return frontend_url;
+}
 const {
   registerSchema,
   verifyotplength,
@@ -22,7 +25,7 @@ const { uploadImage } = require("../controller/ImageController");
 router.use(Cookies.express([""]));
 router.use(
   cors({
-    origin: `${frontend_url}`,
+    origin: get_frontend_url(),
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
