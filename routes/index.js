@@ -51,6 +51,6 @@ router.post(
   verifyotp
 );
 
-router.post("/api/uploadimage", upload.array("images"), uploadImage);
+router.post("/dogechat/uploadimage", upload.array("images"), uploadImage);
 
 module.exports = router;
