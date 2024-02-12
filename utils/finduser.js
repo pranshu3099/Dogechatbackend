@@ -1,11 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const findUser = async (mobileNumber) => {
+const findUser = async (user_email) => {
   try {
     const user = await prisma.users.findFirst({
       where: {
-        mobile_number: mobileNumber,
+        email: user_email,
       },
     });
 
