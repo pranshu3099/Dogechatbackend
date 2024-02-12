@@ -18,7 +18,7 @@ const userRegister = async (req, res, next) => {
         message: "User with the provided mobile_number already exists.",
       });
     } else {
-      await Prisma.users.create({
+      const user = await Prisma.users.create({
         data: {
           name: name,
           mobile_number: mobile_number,
@@ -29,7 +29,8 @@ const userRegister = async (req, res, next) => {
         message: "user created successfully",
         success: true,
       };
-      console.log(req.body);
+      req.user_signup = true;
+      req.user_id = user?.id;
       next();
     }
   } catch (err) {
@@ -41,15 +42,14 @@ const userRegister = async (req, res, next) => {
 };
 
 const userLogin = async (req, res, next) => {
-  const { mobile_number } = req?.body;
+  const { email } = req?.body;
   try {
-    const user = await findUser(mobile_number);
+    const user = await findUser(email);
     if (user) {
-      req.session.user = user;
-      req.session.userid = user?.mobile_number;
-      return res
-        .status(200)
-        .json({ message: "successfully loggedin", success: true, user: user });
+      req.name = user?.name;
+      req.mobile_number = user?.mobile_number;
+      req.user_id = user?.id;
+      next();
     } else {
       return res.status(401).json({
         message: "Authentication failed: User not registered",
