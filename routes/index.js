@@ -13,6 +13,7 @@ const {
   registerSchema,
   verifyotplength,
   validateMobilenumber,
+  validateEmail,
 } = require("../schema/schema");
 const { validate } = require("../middleware/validate");
 const {
@@ -20,7 +21,11 @@ const {
   userLogin,
   isLoggedin,
 } = require("../controller/AuthController");
-const { sendEmail, verifyotp } = require("../services/mailservice");
+const {
+  sendLoginEmail,
+  sendSignupEmail,
+  verifyotp,
+} = require("../services/mailservice");
 const { uploadImage } = require("../controller/ImageController");
 router.use(Cookies.express([""]));
 router.use(
@@ -34,13 +39,14 @@ router.post(
   "/dogechat/register",
   validate({ body: registerSchema }),
   userRegister,
-  sendEmail
+  sendSignupEmail
 );
 
 router.post(
   "/dogechat/login",
-  validate({ body: validateMobilenumber }),
-  userLogin
+  validate({ body: validateEmail }),
+  userLogin,
+  sendLoginEmail
 );
 
 router.get("/dogechat/checkvalidity", isLoggedin);
