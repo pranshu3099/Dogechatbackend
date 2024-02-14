@@ -6,6 +6,7 @@ module.exports = session({
   store: new RedisStore({ client: redisClient }),
   secret: secretkey,
   resave: false,
+  name: "doge-token",
   saveUninitialized: false, // if you are not adding anything to the session object we are not going to add it to the database
   cookie: {
     secure: false,
