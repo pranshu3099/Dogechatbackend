@@ -12,7 +12,7 @@ const findUser = async (user_email) => {
     return user;
   } catch (error) {
     console.error("Error in findUser:", error);
-    throw new Error("Error finding user by mobile number");
+    throw new Error("Error finding user by email");
   } finally {
     await prisma.$disconnect();
   }
