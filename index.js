@@ -9,7 +9,7 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const frontend_url = process.env.FRONTEND_URL;
 const io = socketIO(server, {
-  path: "/socket.io",
+  path: "/dogechat/socket.io",
   cors: {
     origin: `${frontend_url}`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
