@@ -28,13 +28,13 @@ const {
 } = require("../services/mailservice");
 const { uploadImage } = require("../controller/ImageController");
 router.use(Cookies.express([""]));
-router.use(
-  cors({
-    origin: get_frontend_url(),
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+const obj = {
+  origin: get_frontend_url(),
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+console.log(obj);
+router.use(cors(obj));
 router.post(
   "/dogechat/register",
   validate({ body: registerSchema }),
