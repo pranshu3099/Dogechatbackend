@@ -36,7 +36,6 @@ io.on("connection", (socket) => {
     clearTimeout(inactivityTimeout);
     io.emit("chat message", msg);
     let doge_message = await DogeResponse(msg);
-    console.log(doge_message);
     io.emit("chat message", doge_message, "doge");
   });
 
