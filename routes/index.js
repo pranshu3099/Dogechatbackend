@@ -40,27 +40,27 @@ router.use(cors(cors_obj));
 // });
 
 router.post(
-  "/dogechat/register",
+  "/doge/dogechat/register",
   validate({ body: registerSchema }),
   userRegister,
   sendSignupEmail
 );
 
 router.post(
-  "/dogechat/login",
+  "/doge/dogechat/login",
   validate({ body: validateEmail }),
   userLogin,
   sendLoginEmail
 );
 
-router.get("/dogechat/checkvalidity", isLoggedin);
+router.get("/doge/dogechat/checkvalidity", isLoggedin);
 
 router.post(
-  "/dogechat/verifyotp",
+  "/doge/dogechat/verifyotp",
   validate({ body: verifyotplength }),
   verifyotp
 );
 
-router.post("/dogechat/uploadimage", upload.array("images"), uploadImage);
+router.post("/doge/dogechat/uploadimage", upload.array("images"), uploadImage);
 
 module.exports = router;
