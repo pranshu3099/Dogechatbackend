@@ -34,6 +34,11 @@ const cors_obj = {
   credentials: true,
 };
 router.use(cors(cors_obj));
+
+router.get("/dogechat", (req, res) => {
+  res.send("welcome to dogechat");
+});
+
 router.post(
   "/dogechat/register",
   validate({ body: registerSchema }),
