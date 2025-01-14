@@ -35,9 +35,9 @@ const cors_obj = {
 };
 router.use(cors(cors_obj));
 
-router.get("/", (req, res) => {
-  res.send("welcome to dogechat");
-});
+// router.get("/", (req, res) => {
+//   res.send("welcome to dogechat");
+// });
 
 router.post(
   "/dogechat/register",
